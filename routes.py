@@ -9,7 +9,7 @@ from dbsettings import db
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
 
-users.initadmin("admin", "aaa", "a.b@gmail.com")
+#users.initadmin("admin", "aaa", "a.b@gmail.com")
 
 @app.route("/usermgmt", methods=["GET", "POST"])
 def usermgmt():
@@ -20,6 +20,8 @@ def usermgmt():
         user = request.form["user"]
         details = users.getuserdetails(user)
         return render_template("usersdetails.html", details=details)
+
+
 
 @app.route("/changeuser", methods=["POST"])
 def changeuser():
@@ -37,13 +39,24 @@ def changeuser():
             app.logger.info(promo[0])
             if promo[0] == "yes":
                 newrole = "admin"
-            newrole = request.form["newrole"]
+        newrole = request.form["newrole"]
         newemail = request.form["newemail"]
+        newpassword = request.form["newpassword"]
+        newpassword2 = request.form["newpassword2"]
+               
         if newemail is None:
             newemail =""
+        if newpassword is None:
+            newpassword = ""
+        else:
+            if newpassword != newpassword2:
+                return render_template("error.html", message="Cannot change password for "+username+", passwords not same")     
+
         username = request.form["username"]
-        users.changeuserdetails(username, newrole,newemail)
+        users.changeuserdetails(username, newrole,newemail,newpassword)
     return redirect("/home?stoken="+session["csrf_token"])
+
+
 
 @app.route("/contentmgmt", methods=["GET", "POST"])
 def contentmgmt():
