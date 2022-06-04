@@ -9,7 +9,7 @@ from dbsettings import db
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
 
-users.initadmin("admin", "a", "a.b@gmail.com")
+users.initadmin("aaa", "aaa", "a.b@gmail.com")
 
 @app.route("/usermgmt", methods=["GET", "POST"])
 def usermgmt():

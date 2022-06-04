@@ -9,6 +9,7 @@ import secrets
 
 
 def initadmin(username, password, email):
+    app.logger.info("initadmin "+username) 
     sql = "SELECT *, password FROM accounts WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
@@ -50,7 +51,8 @@ def register(username, password, email, role):
         db.session.execute(sql, {"username":username, "password":hash_value, "email":email, "role":role, "created_on":created_on})
         db.session.commit()
         return True
-    except:
+    except Exception as e:
+        app.logger.info("initadmin "+str(e)) 
         return False
 
 def removeuser(username):
