@@ -9,6 +9,7 @@ from dbsettings import db
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
 
+#This is used one time when installing to get one admin, password needs to be changed
 #users.initadmin("admin", "aaa", "a.b@gmail.com")
 
 @app.route("/usermgmt", methods=["GET", "POST"])

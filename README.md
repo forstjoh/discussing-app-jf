@@ -26,3 +26,5 @@ Ylläpitäjän oikeudet annetaan, niitä ei pysty käyttäjä itse luomaan. Yll�
 - Ylläpitäjä voi vaihtaa käyttäjän salasanan tai sähköpostiosoitteen.
 
 Hakutoiminnolla näkee, mistä alueilta, viesteistä tai kommenteista hakusana löytyy.
+
+Osoite Herokuun: https://discussing-app-jf.herokuapp.com/

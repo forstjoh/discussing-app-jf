@@ -52,7 +52,7 @@ def register(username, password, email, role):
         db.session.commit()
         return True
     except Exception as e:
-        app.logger.info("initadmin "+str(e)) 
+        app.logger.info("Register fails "+str(e)) 
         return False
 
 def removeuser(username):
@@ -93,9 +93,7 @@ def changepassword(username, newpassword):
     result = db.session.execute(sql, {"username":username, "password":password})
     db.session.commit()  
 
-
-    
-    
+  
 
 def isadmin(username):
     sql ="SELECT role FROM accounts WHERE username=:username"
