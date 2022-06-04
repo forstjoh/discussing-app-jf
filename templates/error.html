@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Error{% endblock %}
+{% block content %}
+
+Error occurred
+<br> <br> 
+
+
+    Error occured: {{ message }}
+
+
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+<br> <br>  <a href="/home">Go back to main page</a>
+
+{% endblock %}

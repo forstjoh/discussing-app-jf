@@ -1,0 +1,42 @@
+
+{% extends "layout.html" %}
+{% block title %}Chains{% endblock %}
+{% block content %}
+
+Discussion area: {{ area.full_name }}
+<br>
+Created at: {{ area.created_at }}
+<br>
+Created by: {{ area.creator }}
+<br>
+
+<br><br><br>
+
+<form action="/enterchainx" method="post">
+
+Chains in area:
+<p>
+{% for chain in chains %}
+
+<input type="radio" name="chain" id="{{ chain.chain_id }}" value="{{ chain.chain_id }}">
+Name: {{ chain.full_name }}  Story: {{ chain.description }}  Created by:  {{ chain.creator }} Created at: {{ chain.created_at }} 
+ <p>
+{% endfor %}
+</p>
+<input type="hidden" id="area" name="area" value= {{ area.area_id }}>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+{% if chains %}
+    <input type="submit" value="Enter chain">
+{% endif %}
+
+</form>
+
+{% if session.role != "reader" %}
+
+<li><a href="/addnewchain/{{ area.area_id }}">Add new chain to discussion area</a></li>
+
+{% endif %}
+
+
+{% endblock %}
+

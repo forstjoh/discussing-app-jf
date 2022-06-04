@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}Search results{% endblock %}
+{% block content %}
+
+
+
+Areas found for " {{ searchstring }} ":
+
+<br><br>
+
+{%if areas == None%}
+
+No areas found 
+
+{%else%}
+<p>
+
+{% for area in areas %}
+
+Name: {{ area.full_name }}  
+<p>
+
+{% endfor %}
+
+</p>
+{%endif%}
+
+<br><br>
+
+Chains found for {{ searchstring }} in areas:
+
+<br><br>
+
+{%if chains == None%}
+
+No Chains found 
+
+{%else%}
+<p>
+
+{% for chain in chains %}
+
+Name: {{ chain.full_name }}  Story: {{ chain.description }}  Created by:  {{ chain.creator }} Created at: {{ chain.created_at }}        
+<p>
+{% endfor %}
+ </p>
+{%endif%}
+
+
+<br><br>
+
+{%if messages == None%}
+
+No messages found 
+
+{%else%}
+<p>
+
+{% for msg in messages %}
+
+Topic: {{ msg.full_name }}  Story: {{ msg.message_text }}  Created by:  {{ msg.creator }} Created at: {{ msg.created_at }} 
+ <p>
+{% endfor %}
+</p>
+
+{%endif%}
+
+
+{% endblock %}

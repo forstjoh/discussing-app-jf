@@ -1,0 +1,90 @@
+
+{% extends "layout.html" %}
+{% block title %}User details{% endblock %}
+{% block content %}
+
+<script>
+  // from https://www.geeksforgeeks.org/password-matching-using-javascript/     
+  // Function to check Whether both passwords
+  // is same or not.
+  function checkPassword(form) {
+      password1 = form.newpassword.value;
+      password2 = form.newpassword2.value;
+
+      // If password not entered
+      if (password1 == '')
+        return true;
+            
+      // If Not same return False.    
+      if (password1 != password2) {
+          alert ("\nPassword did not match: Please try again...")
+          return false;
+      }
+
+      // If same return True.
+      else{
+          return true;
+      }
+  }
+</script>
+
+
+<h1 style="background-color:rgb(92, 148, 92);">User details:</h1>
+
+
+<br><br>
+User name: {{ details.username }}
+<br><br>
+Role: {{ details.role }}
+<br><br>
+Email: {{ details.email }}
+<br><br>
+Created: {{ details.created_on }}
+<br><br>
+Last login: {{ details.last_login }}
+
+<br><br><br><br><br><br>
+
+  {% if session.name == details.username or session.role == "admin" %}
+
+  <form action="/changeuser" method="post" onSubmit = "return checkPassword(this)">
+    
+    New password:   <input type="text" name="newpassword">
+    New password again:   <input type="text" name="newpassword2">
+    <br><br>   
+    New role:
+
+    <select name="newrole">
+        <option value="contributor"> contributor
+        <option value="reader"> reader   
+    </select>
+    <br>
+    {% if session.role == "admin" %}
+    <br>
+    Promote to admin:
+        <input type="checkbox" name="promoteadmin" value="yes">   
+    Remove user:
+        <input type="checkbox" name="remove" value="yes">   
+
+    {% endif %}
+
+
+    <br><br>
+
+    New email: <input type="text" name="newemail">
+    <input type="hidden" id="username" name="username" value= {{ details.username }}>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <br><br>
+    <input type="submit" value="Change details">
+    </form>
+
+         
+  
+  {% endif %}
+
+
+  
+
+  {% endblock %}
+
+<br> <br>  <a href="/">Go back to main page</a>

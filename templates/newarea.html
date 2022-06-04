@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}New area{% endblock %}
+{% block content %}
+
+<br>
+
+Add new discussion area, max lenght 50 chars.
+<br>
+<br>
+<br>
+
+<form action="/addnewarea" method="post" onsubmit="return check(this)"">
+
+    Area name: <input type="text" name="full_name" required minlength="4" maxlength="50" size="51">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">     
+    <input type="submit" value="Create area">
+    </form>
+        
+    <p>
+        <br> <br>  <a href="/">Go back to main page</a>
+
+{% endblock %}
+<script>
+    function check(form) {
+        if (form.full_name.value.length > 50) {
+            alert("Areaname too long, max 50 char");
+            return false;
+        }
+   
+        return true;
+    }
+</script>

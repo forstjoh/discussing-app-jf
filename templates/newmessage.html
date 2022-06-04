@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}New message{% endblock %}
+{% block content %}
+
+
+
+Add new message to chain  {{ chain.full_name }}.
+
+<br><br>
+
+<form action="/addnewmessage/{{ chain.chain_id }}" method="post">
+
+    Message subject: <input type="text" name="subject" required minlength="4" maxlength="50" size="51">
+    <p>
+        <br>
+    Message text : <input type="text" name="messagetext" required minlength="4" maxlength="150" size="150">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">    
+    <input type="submit" value="Create message">
+    <input type="hidden" id="chain" name="chain" value={{ chain.chain_id }}>
+    <input type="hidden" id="area" name="area" value={{ chain.area_id }}>
+    
+    
+    </form>
+        
+    <p>
+        <br> <br>  <a href="/">Go back to main page</a>
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}Access rights{% endblock %}
+{% block content %}
+
+
+Select areas to give rights to access to users:
+<br><br>
+<br>
+
+
+<form action="/contentmgmt" method="post">
+
+    <h1 style="background-color:rgb(127, 155, 184);">DISCUSSION AREAS</h1>
+
+    {% for area in discussionareas %}
+
+      <input type="checkbox" name="areas" id="{{ area.area_id }}" value="{{ area.area_id }}">  {{ area.full_name }}  
+       <p>
+
+    {% endfor %}
+
+
+    <h1 style="background-color:rgb(84, 22, 126);">USERS to GIVE ACCESS</h1>
+
+
+    {% for user in users %}
+
+      <input type="checkbox" name="users" id="{{ user.username }}" value="{{ user.username }}">  {{  user.username }}  
+       <p>
+
+    {% endfor %}
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <input type="submit" value="Select areas for selected users">
+  
+</form>
+
+<li><a href="/showright">Show all rights </a></li>
+<li><a href="/deleteright">Clear add rights </a></li>
+
+<br> <br>  <a href="/">Go back to main page</a>
+
+{% endblock %}

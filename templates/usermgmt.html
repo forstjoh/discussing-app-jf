@@ -1,0 +1,33 @@
+
+{% extends "layout.html" %}
+{% block title %}Show user in service{% endblock %}
+{% block content %}
+
+
+<h1 style="background-color:rgb(92, 148, 92);">Users in the service:</h1>
+
+<br><br>
+Select user to manage and click button
+<br><br><br>
+
+
+<form action="/usermgmt" method="post">
+
+
+    {% for user in users %}
+
+        <input type="radio" name="user" id="{{ user.username }}" value="{{ user.username }}">  {{  user.username }}  
+        <p>
+
+    {% endfor %}
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Select user to manage">
+  
+</form>
+
+<br><br>
+
+<a href="/">Go back to main page</a>
+{% endblock %}
+

@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}Place to start{% endblock %}
+{% block content %}
+
+
+
+{% if session.username %}
+  <h2 style="color:rgb(39, 19, 15);">You are logged in as {{ session.username }}, role is {{ session.role }}.</h2>
+{% endif %}
+
+Ask access to certain area from Admin.
+
+<h1 style="background-color:rgb(127, 155, 184);">Areas</h1>
+
+  {% if session.showareas == "True" %}
+    <br>
+    Areas you have right to access (Area count: {{'0' if discussionareas == None else discussionareas|length}})
+    <br>
+    <br>
+    <form action="/enterareax" method="post">
+
+      {% if session.csrf_token %}
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      {% endif %}
+
+      {% for area in discussionareas %}
+        <input type="radio" name="area" id="{{ area.area_id }}" value="{{ area.area_id }}"> {{ area.full_name }}  
+        <p>
+      {% endfor %}
+
+      {% if discussionareas %}
+        <input type="submit" value="Enter area">
+      {% endif %}
+
+
+      
+    </form>
+
+
+
+    {% if session.role != "reader" %}
+      <li><a href="/addnewarea">Add new discussion area</a></li>
+    {% endif %}
+
+    <nav class="menu">
+      <ul>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/logout">Log out</a></li>
+
+  
+        {% if session.role == "admin" %}
+          <li><a href="/usermgmt">Manage users</a></li>
+          <li><a href="/contentmgmt">Manage content</a></li>
+        {% endif %}
+  
+      </ul>
+    </nav>
+  
+
+  {% else %}
+
+    Log in to see areas and join discussions.
+  
+  {% endif %}
+
+
+  
+
+  {% endblock %}

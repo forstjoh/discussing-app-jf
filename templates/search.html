@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+
+
+<br>
+
+Type in search string below. Search tries to find area you have right, and chains and messages in those. Min 2 chars, max 50 chars.
+<br>
+<br>
+<br>
+
+<form action="/search" method="post">
+
+    Search string: <input type="text" name="searchstring" required minlength="2" maxlength="50" size="51">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">     
+    <input type="submit" value="Search">
+    </form>
+        
+    <p>
+        <br> <br>  <a href="/">Go back to main page</a>
+
+
+
+
+
+
+{% endblock %}

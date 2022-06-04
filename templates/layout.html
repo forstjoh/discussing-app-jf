@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Patient analysis information - {% block title %}{% endblock %}</title>
+<h1 style="background-color:rgb(39, 172, 57);">Patient and symptoms analysis information service</h1>
+
+<a href="/">Frontpage</a>
+<br>
+
+{% if session.username %}
+    <a href="/logout">Log out</a>
+{% else %}
+    <a href="/login">Log in</a>
+{% endif %}
+
+<br>
+<hr>
+{% block content %}{% endblock %}
+<hr>

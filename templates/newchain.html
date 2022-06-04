@@ -1,0 +1,29 @@
+
+{% extends "layout.html" %}
+{% block title %}New chain{% endblock %}
+{% block content %}
+
+
+
+Add new chain to discussion area to {{ area.full_name }}.
+<br><br><br>
+
+<form action="/addnewchain/{{ area.area_id }}" method="post" >
+
+    Chain name: <input type="text" name="fullname" required minlength="4" maxlength="50" size="51">
+    <p>
+    <br><br>
+    Chain description: <input type="text" name="description" required minlength="4" maxlength="150" size="150">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">   
+    <input type="submit" value="Create chain">
+    <input type="hidden" id="area" name="area" value={{ area.area_id }}>
+    
+    
+    </form>
+        
+    <p>
+        <br> <br>  <a href="/">Go back to main page</a>
+
+        
+{% endblock %}
+

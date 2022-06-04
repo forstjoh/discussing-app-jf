@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Chains{% endblock %}
+{% block content %}
+
+
+<h1 style="background-color:rgb(219, 74, 74);">Delete all rights</h1>
+
+<br><br>
+Write yes to box below to clear all rights.
+<br><br><br>
+
+<form action="/deleteright" method="post">
+
+    yes?: <input type="text" name="confirm" required minlength="1" maxlength="3" size="3">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <br><br><br>
+    <p>
+    <input type="submit" value="Confirm">
+</form>
+        
+<br><br><br>
+<a href="/">Go back to main page</a>
+
+{% endblock %}

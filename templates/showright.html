@@ -1,0 +1,31 @@
+
+{% extends "layout.html" %}
+{% block title %}Show user and rights{% endblock %}
+{% block content %}
+
+
+
+
+
+All rights:
+<br><br><br>
+
+<form action="/removesomerights" method="post">
+
+<p>
+{% for r in rights %}
+
+<input type="checkbox" name="right" id="{{ r.id }}" value="{{ r.id }}">
+User: {{ r.user_id }}  Area: {{ r.area_id }}  
+ <p>
+{% endfor %}
+</p>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+<input type="submit" value="Remove rights">
+</form>
+
+
+
+{% endblock %}
+
+<br> <br>  <a href="/">Go back to main page</a>
