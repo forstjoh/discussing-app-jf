@@ -1,14 +1,4 @@
 
-#   Table accounts
-
-#   user_id serial PRIMARY KEY,
-#   username VARCHAR ( 50 ) UNIQUE NOT NULL,
-#	password text NOT NULL,
-#	email VARCHAR ( 255 ) UNIQUE NOT NULL,
-#	role VARCHAR (255) NOT NULL, 
-#	created_on TIMESTAMP NOT NULL,
-#   last_login TIMESTAMP 
-
 from sqlalchemy import true
 from dbsettings import db
 from flask import session
@@ -16,6 +6,16 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime, timezone
 from app import app
 import secrets
+
+
+def initadmin(username, password, email):
+    sql = "SELECT *, password FROM accounts WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()
+    if not user:
+        return register(username, password, email, "admin")
+    else:
+        return True
 
 def getusers():
     sql = "SELECT * FROM accounts"

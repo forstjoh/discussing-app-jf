@@ -8,9 +8,8 @@ from sqlalchemy import true
 from dbsettings import db
 from werkzeug.security import check_password_hash, generate_password_hash
 import secrets
-import initapplication as i
 
-#i.initadmin("admin", "a", "a@gmail.com")
+users.initadmin("admin", "a", "a.b@gmail.com")
 
 @app.route("/usermgmt", methods=["GET", "POST"])
 def usermgmt():
