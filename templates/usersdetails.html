@@ -48,7 +48,8 @@ Last login: {{ details.last_login }}
   {% if session.name == details.username or session.role == "admin" %}
 
   <form action="/changeuser" method="post" onSubmit = "return checkPassword(this)">
-    
+    Note if you change own password as admin, select promote to admin!
+    <br>
     New password:   <input type="text" name="newpassword">
     New password again:   <input type="text" name="newpassword2">
     <br><br>   
@@ -61,7 +62,7 @@ Last login: {{ details.last_login }}
     <br>
     {% if session.role == "admin" %}
     <br>
-    Promote to admin:
+    Promote to admin or keep ADMIN:
         <input type="checkbox" name="promoteadmin" value="yes">   
     Remove user:
         <input type="checkbox" name="remove" value="yes">   

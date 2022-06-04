@@ -35,12 +35,13 @@ def changeuser():
                     return redirect("/home?stoken="+session["csrf_token"])
                 else:
                     return render_template("error.html", message="Cannot remove user "+username) 
+        newrole = request.form["newrole"]
         promo = request.form.getlist('promoteadmin')
         if len(promo) >0:
             app.logger.info(promo[0])
             if promo[0] == "yes":
                 newrole = "admin"
-        newrole = request.form["newrole"]
+        
         newemail = request.form["newemail"]
         newpassword = request.form["newpassword"]
         newpassword2 = request.form["newpassword2"]
